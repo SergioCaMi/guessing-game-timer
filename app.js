@@ -7,6 +7,7 @@ const remaining = document.querySelector('.lastResult');
 const startOver = document.querySelector('.resultParas');
 const lowOrHi = document.querySelector('.lowOrHi');
 const p = document.createElement('p');
+const timerDisplay = document.getElementById("timer");
 let previousGuesses = [];
 let numGuesses = 1;
 let playGame = true;
@@ -96,6 +97,19 @@ function newGame() {
     playGame = true;
   })
 }
+
+const intervalTimer = setInterval(function() {
+  if (remainingTime > 0) {
+    remainingTime--;
+    timerDisplay.textContent = remainingTime;
+  } else {
+    clearInterval(intervalTimer);
+    displayMessage(`Game Over! Number was ${randomNumber}`);
+    endGame();
+
+  }
+}, 1000);
+
 //Allow to restart game with restart button
 //Change DIV to a form so it can accept the enter key
 
